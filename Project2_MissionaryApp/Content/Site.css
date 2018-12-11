@@ -1,0 +1,66 @@
+﻿body {
+    padding-top: 58px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+{
+    box-sizing: border-box;
+}
+
+/* Create two equal columns that floats next to each other */
+.column {
+    float: left;
+    width: 50%;
+    padding: 10px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    padding: 16px;
+    text-align: left;
+}
+
+/* Responsive columns */
+@media screen and (max-width: 600px) {
+    .column {
+        width: 100%;
+        display: block;
+        margin-bottom: 20px;
+    }
+}
+
+.size{
+    justify-content: center;
+    height: 300px;
+    text-align: center;
+  
+.jumbotronCenter {
+    text-align: center;
+}
+
+.bg {
+    background: linear-gradient(rgba(110,92,45,.2), rgba(110,92,45,.5)), url(../Images/bg.jpg);
+    background-position: center;
+    background-attachment: fixed;
+    background-size: cover;
+}

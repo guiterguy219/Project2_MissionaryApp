@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body>
+    <nav class="navbar navbar-expand-md bg-dark navbar-dark fixed-top" id="navbar">
+        @Html.ActionLink("Mission Site", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item dropdown show">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="@Url.Action("Index", "Missions")" role="button" aria-haspopup="true" aria-expanded="false">Missions</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="@Url.Action("Faqs", "Missions", new { controller = "Missions", action = "Faqs", mission = "peruTrujillo"})">Peru Trujillo</a>
+                        <a class="dropdown-item" href="@Url.Action("Faqs", "Missions", new { controller = "Missions", action = "Faqs", mission = "mexicoTampico"})">Mexico Tampico</a>
+                        <a class="dropdown-item" href="@Url.Action("Faqs", "Missions", new { controller = "Missions", action = "Faqs", mission = "russiaNovo"})">Russia Novosibirsk</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("About", "Home")">About us</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("Contact", "Home")">Contact</a>
+                </li>
+            </ul>
+            @Html.Partial("_LoginPartial")
+        </div>
+    </nav>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - AJAR Mission Corp.</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

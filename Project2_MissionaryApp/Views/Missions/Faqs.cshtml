@@ -1,0 +1,99 @@
+﻿@model Project2_MissionaryApp.Models.Mission
+
+@{
+    ViewBag.Title = "FAQ's - " + Model.MissionName;
+}
+<br />
+<ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home")">Home</a></li>
+    <li class="breadcrumb-item"><a href="@Url.Action("Index", "Missions")">Missions</a></li>
+    <li class="breadcrumb-item active">@Model.MissionName</li>
+</ol>
+
+<h2>@Model.MissionName Mission</h2>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header bg-dark text-white">
+                    <h2>Mission Info.</h2>
+                </div>
+                <div class="card-body">
+                    <h3>Mission Logo</h3>
+                    <p>
+                        <img src=@Model.LogoFilePath alt="mission logo" style="max-width: 80%;"/>
+                    </p>
+                    <h3>Mission President</h3>
+                    <p>President @Model.President</p>
+                    <h3>Address</h3>
+                    <p>@Html.Raw(Model.Address)</p>
+                    <h3>Language</h3>
+                    <p>@Model.Language</p>
+                    <h3>Climate</h3>
+                    <p>@Model.Climate</p>
+                    <h3>Dominant Religion</h3>
+                    <p>@Model.DominantReligion</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header bg-dark text-white">
+                    <h2>FAQ's</h2>
+                </div>
+                <div class="card-body d-flex flex-column align-items-stretch">
+                    @{
+                        for (int i = 1; i <= Model.QuestionsList.Count; i++)
+                        {
+                            <div class="card bg-light mb-2">
+                                <div class="card-body">
+                                    <h5>Question:</h5>
+                                    <p>@Model.QuestionsList[(i - 1)]</p>
+                                    <button type="button" class="btn btn-danger" onclick="reply(@i)">Reply</button>
+                                    <div id="res_@i" class="m-2" style="display: none;">
+                                        <form>
+                                            <formgroup>
+                                                <label for="response">Enter response here:</label>
+                                                <textarea id="response_@i" class="form-control"></textarea>
+                                            </formgroup>
+                                            <button type="button" class="btn btn-primary m-2" onclick="submitRes(@i)">Submit</button>
+                                            <button type="button" class="btn btn-primary" onclick="cancel(@i)">Cancel</button>
+                                        </form>
+                                    </div>
+                                    <div id="thanks_@i" style="display: none;">
+                                        <p class="text-success mb-0 mt-3">Thanks!</p>
+                                    </div>
+                                    <h5 class="mt-2">Replies:</h5>
+                                    <ul class="list-group list-group-flush" id="replyList_@i">
+                                        <li class="list-group-item">@Model.AnswerList[(i - 1)]</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+                <hr />
+                <div class="card-footer">
+                    <h3>
+                        Ask a question here!
+                    </h3>
+                    <form>
+                        <formgroup>
+                            <textarea id="add_question" class="form-control" rows="1" placeholder="Enter question..."></textarea>
+                        </formgroup>
+                        <button type="button" class="btn btn-primary m-2" onclick="submitQuestion()">Submit</button>
+                    </form>
+                    <div id="progDiv" class="progress" style="display: none;">
+                        <div id="quesProg" class="progress-bar bg-danger progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0;"></div>
+                    </div>
+                    <div id="successQues" style="display: none;">
+                        <p class="text-success mb-0 ml-3">Success!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/faqs.js"></script>

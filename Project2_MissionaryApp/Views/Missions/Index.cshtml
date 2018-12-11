@@ -1,0 +1,15 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+<br />
+<ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home")">Home</a></li>
+    <li class="breadcrumb-item active">Missions</li>
+</ol>
+
+<h2>Missions</h2>
+
+<button type="button" class="btn btn-primary btn-lg btn-block" onclick="location.href='@Url.Action("Faqs", "Missions", new { controller = "Missions", action = "Faqs", mission = "peruTrujillo"})'">Peru Trujillo</button>
+<button type="button" class="btn btn-primary btn-lg btn-block" onclick="location.href='@Url.Action("Faqs", "Missions", new { controller = "Missions", action = "Faqs", mission = "mexicoTampico"})'">Mexico Tampico</button>
+<button type="button" class="btn btn-primary btn-lg btn-block" onclick="location.href='@Url.Action("Faqs", "Missions", new { controller = "Missions", action = "Faqs", mission = "russiaNovo"})'">Russia Novosibirsk</button>
