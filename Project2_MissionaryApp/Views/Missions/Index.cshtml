@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<Project2_MissionaryApp.Models.Mission>
 @{
     ViewBag.Title = "Index";
 }
@@ -10,6 +10,7 @@
 
 <h2>Missions</h2>
 
-<button type="button" class="btn btn-primary btn-lg btn-block" onclick="location.href='@Url.Action("Faqs", "Missions", new { controller = "Missions", action = "Faqs", mission = "peruTrujillo"})'">Peru Trujillo</button>
-<button type="button" class="btn btn-primary btn-lg btn-block" onclick="location.href='@Url.Action("Faqs", "Missions", new { controller = "Missions", action = "Faqs", mission = "mexicoTampico"})'">Mexico Tampico</button>
-<button type="button" class="btn btn-primary btn-lg btn-block" onclick="location.href='@Url.Action("Faqs", "Missions", new { controller = "Missions", action = "Faqs", mission = "russiaNovo"})'">Russia Novosibirsk</button>
+@foreach(var item in Model)
+{
+    @Html.ActionLink(item.MissionName, "Faqs", "Missions", routeValues: new { id = item.MissionId}, htmlAttributes: new { @class= "btn btn-primary btn-lg btn-block" })
+}

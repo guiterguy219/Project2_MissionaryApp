@@ -11,16 +11,21 @@ namespace Project2_MissionaryApp.Controllers
     public class HomeController : Controller
     {
         // GET: Home
+        [Route("")]
+        [Route("Home")]
+        [Route("Home/Index")]
         public ActionResult Index()
         {
             return View();
         }
 
+        [Route("Home/About")]
         public ActionResult About()
         {
             return View();
         }
 
+        [Route("Home/Contact")]
         public ActionResult Contact()
         {
             return View();

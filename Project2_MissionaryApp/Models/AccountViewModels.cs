@@ -5,6 +5,14 @@ namespace Project2_MissionaryApp.Models
 {
     public class ExternalLoginConfirmationViewModel
     {
+        [Required(ErrorMessage = "Please enter first name.")]
+        [Display(Name = "First Name")]
+        public string FirstName { get; set; }
+
+        [Required(ErrorMessage = "Please enter last name.")]
+        [Display(Name = "Last Name")]
+        public string LastName { get; set; }
+
         [Required]
         [Display(Name = "Email")]
         public string Email { get; set; }
@@ -64,6 +72,14 @@ namespace Project2_MissionaryApp.Models
 
     public class RegisterViewModel
     {
+        [Required(ErrorMessage = "Please enter first name.")]
+        [Display(Name = "First Name")]
+        public string FirstName { get; set; }
+
+        [Required(ErrorMessage = "Please enter last name.")]
+        [Display(Name = "Last Name")]
+        public string LastName { get; set; }
+
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]

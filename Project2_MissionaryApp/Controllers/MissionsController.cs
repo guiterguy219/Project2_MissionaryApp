@@ -1,4 +1,5 @@
-﻿using Project2_MissionaryApp.Models;
+﻿using Project2_MissionaryApp.Controllers;
+using Project2_MissionaryApp.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,27 +8,69 @@ using System.Web.Mvc;
 
 namespace MissionaryApp.Controllers
 {
-    public class MissionsController : Controller
+    [Authorize]
+    public class MissionsController : AccountController
     {
-        public Dictionary<string, Mission> missionDict = new Dictionary<string, Mission>();
-
         // GET: Missions
+        [AllowAnonymous]
         [Route("Missions")]
         [Route("Missions/Index")]
-        [Route("Missions/Faqs")]
         public ActionResult Index()
         {
             return View();
         }
 
-        [Route("Missions/Faqs/{mission}")]
-        public ActionResult Faqs(string mission)
+        [AllowAnonymous]
+        public ActionResult Faqs(int? id)
         {
-            missionDict.Add("peruTrujillo", new Mission("Peru Trujillo", "Kurt Marler", "Avenida Larco 849, Piso 3<br>Urb. La Merced<br>Trujillo, La Libertad<br>Peru", "Spanish", "Temperate, Arid", "Catholic", "/Images/peruTrujillo.jpg"));
-            missionDict.Add("mexicoTampico", new Mission("Mexico Tampico", "Russell Andrew Robinson", "Ejercito Mexicano No. 501<br>Col. Loma del Gallo 89136<br>Ciudad Madero, Tamaulipas<br>Mexico", "Spanish", "Humid, Dank", "Catholic", "/Images/mexicoTampico.jpg"));
-            missionDict.Add("russiaNovo", new Mission("Russia Novosibirsk", "Michael G. Williams", "46 Kirova Street<br>Novosibirsk<br>Novosibirsk Oblast 630102<br>Russia", "Russian", "Cold, Cold", "Orthodox Christianity", "/Images/russiaNovo.jpg"));
+            if(id == null)
+            {
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
 
-            return View(missionDict[mission]);
+        [HttpPost]
+        public ActionResult NewQuestion(FormCollection form, int id)
+        {
+            if (form["question"] != null && form["question"] != String.Empty)
+            {
+
+            }
+
+            return RedirectToAction("Faqs", routeValues: new { id = id });
+        }
+
+        [HttpPost]
+        public ActionResult NewAnswer(FormCollection form, int missionID, int questionID)
+        {
+            if (form["answer_" + questionID] != null && form["answer_" + questionID] != String.Empty)
+            {
+
+            }
+            else
+
+            return RedirectToAction("Faqs", routeValues: new { id = missionID });
+        }
+
+        public ActionResult DeleteQ(string uId, int qId, int missionId)
+        {
+            if(uId == User.Identity.Name)
+            {
+
+            }
+
+            return RedirectToAction("Faqs", routeValues: new { id = missionId });
+        }
+
+        public ActionResult DeleteA(string uId, int aId, int missionId)
+        {
+            if (uId == User.Identity.Name)
+            {
+
+            }
+
+            return RedirectToAction("Faqs", routeValues: new { id = missionId });
         }
     }
 }
