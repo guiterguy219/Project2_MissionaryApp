@@ -173,14 +173,29 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MissionsController.cs" />
+    <Compile Include="DAL\MissionContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201812102030518_InitialCreate.cs" />
+    <Compile Include="Migrations\201812102030518_InitialCreate.Designer.cs">
+      <DependentUpon>201812102030518_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201812112219513_FirstName.cs" />
+    <Compile Include="Migrations\201812112219513_FirstName.Designer.cs">
+      <DependentUpon>201812112219513_FirstName.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201812112223077_LastName.cs" />
+    <Compile Include="Migrations\201812112223077_LastName.Designer.cs">
+      <DependentUpon>201812112223077_LastName.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Contact.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Mission.cs" />
+    <Compile Include="Models\MissionQuestions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -221,6 +236,7 @@
     <Content Include="Scripts\esm\popper-utils.min.js.map" />
     <Content Include="Scripts\esm\popper-utils.js.map" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\faqs.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
@@ -284,6 +300,7 @@
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Missions\Faqs.cshtml" />
     <Content Include="Views\Missions\Index.cshtml" />
+    <Content Include="Views\Missions\FaqsPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -300,6 +317,17 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\index.d.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201812102030518_InitialCreate.resx">
+      <DependentUpon>201812102030518_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812112219513_FirstName.resx">
+      <DependentUpon>201812112219513_FirstName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812112223077_LastName.resx">
+      <DependentUpon>201812112223077_LastName.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

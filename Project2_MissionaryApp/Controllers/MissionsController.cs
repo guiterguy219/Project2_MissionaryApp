@@ -1,4 +1,6 @@
-﻿using Project2_MissionaryApp.Models;
+﻿using Project2_MissionaryApp.Controllers;
+using Project2_MissionaryApp.DAL;
+using Project2_MissionaryApp.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,27 +9,99 @@ using System.Web.Mvc;
 
 namespace MissionaryApp.Controllers
 {
-    public class MissionsController : Controller
+    [Authorize]
+    public class MissionsController : AccountController
     {
-        public Dictionary<string, Mission> missionDict = new Dictionary<string, Mission>();
-
+        private static MissionContext db = new MissionContext();
         // GET: Missions
+        [AllowAnonymous]
         [Route("Missions")]
         [Route("Missions/Index")]
-        [Route("Missions/Faqs")]
         public ActionResult Index()
         {
-            return View();
+            return View(db.Mission.ToList());
         }
 
-        [Route("Missions/Faqs/{mission}")]
-        public ActionResult Faqs(string mission)
+        [AllowAnonymous]
+        public ActionResult Faqs(int? id)
         {
-            missionDict.Add("peruTrujillo", new Mission("Peru Trujillo", "Kurt Marler", "Avenida Larco 849, Piso 3<br>Urb. La Merced<br>Trujillo, La Libertad<br>Peru", "Spanish", "Temperate, Arid", "Catholic", "/Images/peruTrujillo.jpg"));
-            missionDict.Add("mexicoTampico", new Mission("Mexico Tampico", "Russell Andrew Robinson", "Ejercito Mexicano No. 501<br>Col. Loma del Gallo 89136<br>Ciudad Madero, Tamaulipas<br>Mexico", "Spanish", "Humid, Dank", "Catholic", "/Images/mexicoTampico.jpg"));
-            missionDict.Add("russiaNovo", new Mission("Russia Novosibirsk", "Michael G. Williams", "46 Kirova Street<br>Novosibirsk<br>Novosibirsk Oblast 630102<br>Russia", "Russian", "Cold, Cold", "Orthodox Christianity", "/Images/russiaNovo.jpg"));
+            if(id == null)
+            {
+                return RedirectToAction("Index");
+            }
+            return View(db.Mission.Find(id));
+        }
 
-            return View(missionDict[mission]);
+        [HttpPost]
+        public ActionResult NewQuestion(FormCollection form, int id)
+        {
+            if (form["question"] != null && form["question"] != String.Empty)
+            {
+                MissionQuestions question = new MissionQuestions();
+                question.MissionID = id;
+                question.Question = form["question"];
+                question.UserID = User.Identity.Name;
+
+                db.MissionQuestions.Add(question);
+                db.SaveChanges();
+            }
+            else
+            {
+                ModelState.AddModelError("question", "Please enter a question.");
+            }
+
+            return RedirectToAction("Faqs", routeValues: new { id = id });
+        }
+
+        [HttpPost]
+        public ActionResult NewAnswer(FormCollection form, int missionID, int questionID)
+        {
+            if (form["answer_" + questionID] != null && form["answer_" + questionID] != String.Empty)
+            {
+                MissionAnswers answer = new MissionAnswers();
+                answer.MissionQuestionID = questionID;
+                answer.Answer = form["answer_" + questionID];
+                answer.UserID = User.Identity.Name;
+
+                db.MissionAnswers.Add(answer);
+                db.SaveChanges();
+            }
+            else
+            {
+                ModelState.AddModelError("response", "Please enter your response.");
+            }
+
+            return RedirectToAction("Faqs", routeValues: new { id = missionID });
+        }
+
+        public ActionResult DeleteQ(string uId, int qId, int missionId)
+        {
+            if(uId == User.Identity.Name)
+            {
+                foreach(MissionAnswers answer in db.MissionAnswers.Where(a => a.MissionQuestionID == qId))
+                {
+                    db.MissionAnswers.Remove(answer);
+                    db.SaveChanges();
+                }
+
+                MissionQuestions question = db.MissionQuestions.Find(qId);
+                db.MissionQuestions.Remove(question);
+                db.SaveChanges();  
+            }
+
+            return RedirectToAction("Faqs", routeValues: new { id = missionId });
+        }
+
+        public ActionResult DeleteA(string uId, int aId, int missionId)
+        {
+            if (uId == User.Identity.Name)
+            {
+                MissionAnswers answer = db.MissionAnswers.Find(aId);
+                db.MissionAnswers.Remove(answer);
+                db.SaveChanges();
+            }
+
+            return RedirectToAction("Faqs", routeValues: new { id = missionId });
         }
     }
 }

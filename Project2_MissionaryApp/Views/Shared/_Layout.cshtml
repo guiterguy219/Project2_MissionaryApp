@@ -4,11 +4,15 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
 </head>
 <body>
+    @using Project2_MissionaryApp.DAL
+    @using Project2_MissionaryApp.Models
+    @{MissionContext db = new MissionContext();}
     <nav class="navbar navbar-expand-md bg-dark navbar-dark fixed-top" id="navbar">
         @Html.ActionLink("Mission Site", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
@@ -19,17 +23,15 @@
                 <li class="nav-item dropdown show">
                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="@Url.Action("Index", "Missions")" role="button" aria-haspopup="true" aria-expanded="false">Missions</a>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="@Url.Action("Faqs", "Missions", new { controller = "Missions", action = "Faqs", mission = "peruTrujillo"})">Peru Trujillo</a>
-                        <a class="dropdown-item" href="@Url.Action("Faqs", "Missions", new { controller = "Missions", action = "Faqs", mission = "mexicoTampico"})">Mexico Tampico</a>
-                        <a class="dropdown-item" href="@Url.Action("Faqs", "Missions", new { controller = "Missions", action = "Faqs", mission = "russiaNovo"})">Russia Novosibirsk</a>
+                        @foreach(var item in db.Mission.ToList())
+                        {
+                            @Html.ActionLink(item.MissionName, "Faqs", "Missions", routeValues: new { id = item.MissionId}, htmlAttributes: new { @class="dropdown-item"})
+                        }
+                        @Html.ActionLink("See More...", "Index", "Missions", htmlAttributes: new { @class = "dropdown-item" })
                     </div>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="@Url.Action("About", "Home")">About us</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="@Url.Action("Contact", "Home")">Contact</a>
-                </li>
+                <li class="nav-item">@Html.ActionLink("About Us", "About", "Home", null, htmlAttributes: new { @class = "nav-link" })</li>
+                <li class="nav-item">@Html.ActionLink("Contact", "Contact", "Home", null, htmlAttributes: new { @class = "nav-link" })</li>
             </ul>
             @Html.Partial("_LoginPartial")
         </div>

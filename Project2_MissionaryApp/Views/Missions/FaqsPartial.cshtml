@@ -1,0 +1,91 @@
+﻿
+<div class="card">
+    <div class="card-header bg-dark text-white">
+        <h2>FAQ's</h2>
+    </div>
+    <div class="card-body d-flex flex-column align-items-stretch">
+        @if (Model.MissionQuestions.Count > 0)
+        {
+            foreach (var item in Model.MissionQuestions)
+            {
+                <div class="card bg-light mb-2">
+                    <div class="card-body">
+                        <div onmouseenter="ShowTools(qdelete_@item.MissionQuestionID)" onmouseleave="HideTools(qdelete_@item.MissionQuestionID)">
+                            <div class="d-flex align-items-center">
+                                <h5 class="mr-auto">Question:</h5>
+                                @if (item.UserID == User.Identity.Name)
+                                {
+                                    <a href="@Url.Action("DeleteQ", "Missions", routeValues: new { uId = item.UserID, qId = item.MissionQuestionID, missionId = Model.MissionId})" class="text-danger" id="qdelete_@item.MissionQuestionID" style="display: none;">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </a>
+                                }
+                            </div>
+                            <p>@item.Question</p>
+                        </div>
+                        <button type="button" class="btn btn-danger" onclick="reply(@item.MissionQuestionID)">Reply</button>
+                        <div id="res_@item.MissionQuestionID" class="m-2" style="display: none;">
+                            @using (Html.BeginForm("NewAnswer", "Missions", routeValues: new { missionID = Model.MissionId, questionID = item.MissionQuestionID }, method: FormMethod.Post))
+                            {
+                                <formgroup>
+                                    <label for="response">Enter response here:</label>
+                                    <textarea id="response_@item.MissionQuestionID" class="form-control" name="answer_@item.MissionQuestionID"></textarea>
+                                </formgroup>
+                                <button type="submit" class="btn btn-primary m-2">Submit</button>
+                                <button type="button" class="btn btn-primary" onclick="cancel(@item.MissionQuestionID)">Cancel</button>
+                            }
+                        </div>
+                        <h5 class="mt-2">Replies:</h5>
+                        @if (item.MissionAnswers != null)
+                        {
+                            if (item.MissionAnswers.Count > 0)
+                            {
+                                <ul class="list-group list-group-flush" id="replyList_@item.MissionQuestionID">
+                                    @foreach (var answer in item.MissionAnswers)
+                                    {
+                                        <li class="list-group-item" onmouseenter="ShowTools(adelete_@answer.MissionAnswerID)" onmouseleave="HideTools(adelete_@answer.MissionAnswerID)">
+                                            <div class="d-flex align-items-center">
+                                                <h5 class="mr-auto">@answer.UserID.Split('@')[0] says:</h5>
+                                                @if (answer.UserID == User.Identity.Name)
+                                                {
+                                                    <a href="@Url.Action("DeleteA", "Missions", routeValues: new { uId = answer.UserID, aId = answer.MissionAnswerID, missionId = Model.MissionId})" class="text-secondary" id="adelete_@answer.MissionAnswerID" style="display: none;">
+                                                        <i class="fas fa-times"></i>
+                                                    </a>
+                                                }
+                                            </div>
+                                            <p>@answer.Answer</p>
+                                        </li>
+                                    }
+                                </ul>
+                            }
+                            else
+                            {
+                                <p>Be the first to reply!</p>
+                            }
+                        }
+                        else
+                        {
+                            <p>Be the first to reply!</p>
+                        }
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <h4>No questions yet!</h4>
+        }
+    </div>
+    <hr />
+    <div class="card-footer">
+        <h3>
+            Ask a question here!
+        </h3>
+        @using (Html.BeginForm("NewQuestion", "Missions", routeValues: new { id = Model.MissionId }, method: FormMethod.Post))
+        {
+            <formgroup>
+                <textarea id="add_question" class="form-control" rows="1" placeholder="Enter question..." name="question"></textarea>
+            </formgroup>
+            <button type="submit" class="btn btn-primary m-2">Submit</button>
+        }
+    </div>
+</div>
