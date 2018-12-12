@@ -48,7 +48,6 @@ namespace MissionaryApp.Controllers
             {
 
             }
-            else
 
             return RedirectToAction("Faqs", routeValues: new { id = missionID });
         }
