@@ -7,11 +7,8 @@ using System.Web;
 
 namespace Project2_MissionaryApp.Models
 {
-    [Table("Mission")]
     public class Mission
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int MissionId { get; set; }
         public string MissionName { get; set; }
         public string President { get; set; }
