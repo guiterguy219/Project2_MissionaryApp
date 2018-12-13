@@ -46,19 +46,7 @@ namespace Project2_MissionaryApp
             app.UseTwoFactorRememberBrowserCookie(DefaultAuthenticationTypes.TwoFactorRememberBrowserCookie);
 
             //Uncomment the following lines to enable logging in with third party login providers
-            app.UseMicrosoftAccountAuthentication(
-                clientId: "4c315aab-af1f-46a2-ab1d-2d1dad4e56da",
-                clientSecret: "cxt64@czknRLOSXQY282?)(");
-
-            app.UseFacebookAuthentication(
-               appId: "1892771660820604",
-               appSecret: "5c54c53a1339658ad015b71ead4d9033");
-
-            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            {
-                ClientId = "378613532567-cm6f786d5soc9nq5lb48u3sju63gud2a.apps.googleusercontent.com",
-                ClientSecret = "QQRMI9fX2d7XLPmbNSRea0bt"
-            });
+            
 
             //app.UseTwitterAuthentication(
             //   consumerKey: "",
