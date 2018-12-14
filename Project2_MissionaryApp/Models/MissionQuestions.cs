@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Project2_MissionaryApp.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -7,7 +8,7 @@ using System.Web;
 
 namespace Project2_MissionaryApp.Models
 {
-    //show up please
+
     [Table("MissionQuestions")]
     public class MissionQuestions
     {
@@ -33,3 +34,4 @@ namespace Project2_MissionaryApp.Models
         public string UserID { get; set; }
     }
 }
+

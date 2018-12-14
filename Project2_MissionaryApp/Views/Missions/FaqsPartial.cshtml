@@ -1,4 +1,5 @@
-﻿
+﻿@model Project2_MissionaryApp.Models.Mission
+
 <div class="card">
     <div class="card-header bg-dark text-white">
         <h2>FAQ's</h2>
@@ -10,28 +11,28 @@
             {
                 <div class="card bg-light mb-2">
                     <div class="card-body">
-                        <div onmouseenter="ShowTools(qdelete_@item.MissionQuestionID)" onmouseleave="HideTools(qdelete_@item.MissionQuestionID)">
+                        <div onmouseenter="ShowTools(qdelete_@item.MissionQuestionId)" onmouseleave="HideTools(qdelete_@item.MissionQuestionId)">
                             <div class="d-flex align-items-center">
                                 <h5 class="mr-auto">Question:</h5>
-                                @if (item.UserID == User.Identity.Name)
+                                @if (item.UserId == User.Identity.Name)
                                 {
-                                    <a href="@Url.Action("DeleteQ", "Missions", routeValues: new { uId = item.UserID, qId = item.MissionQuestionID, missionId = Model.MissionId})" class="text-danger" id="qdelete_@item.MissionQuestionID" style="display: none;">
+                                    <a href="@Url.Action("DeleteQ", "Missions", routeValues: new { uId = item.UserId, qId = item.MissionQuestionId, missionId = Model.MissionId})" class="text-danger" id="qdelete_@item.MissionQuestionId" style="display: none;">
                                         <i class="fas fa-trash-alt"></i>
                                     </a>
                                 }
                             </div>
                             <p>@item.Question</p>
                         </div>
-                        <button type="button" class="btn btn-danger" onclick="reply(@item.MissionQuestionID)">Reply</button>
-                        <div id="res_@item.MissionQuestionID" class="m-2" style="display: none;">
-                            @using (Html.BeginForm("NewAnswer", "Missions", routeValues: new { missionID = Model.MissionId, questionID = item.MissionQuestionID }, method: FormMethod.Post))
+                        <button type="button" class="btn btn-danger" onclick="reply(@item.MissionQuestionId)">Reply</button>
+                        <div id="res_@item.MissionQuestionId" class="m-2" style="display: none;">
+                            @using (Html.BeginForm("NewAnswer", "Missions", routeValues: new { missionID = Model.MissionId, questionID = item.MissionQuestionId }, method: FormMethod.Post))
                             {
                                 <formgroup>
                                     <label for="response">Enter response here:</label>
-                                    <textarea id="response_@item.MissionQuestionID" class="form-control" name="answer_@item.MissionQuestionID"></textarea>
+                                    <textarea id="response_@item.MissionQuestionId" class="form-control" name="answer_@item.MissionQuestionId"></textarea>
                                 </formgroup>
                                 <button type="submit" class="btn btn-primary m-2">Submit</button>
-                                <button type="button" class="btn btn-primary" onclick="cancel(@item.MissionQuestionID)">Cancel</button>
+                                <button type="button" class="btn btn-primary" onclick="cancel(@item.MissionQuestionId)">Cancel</button>
                             }
                         </div>
                         <h5 class="mt-2">Replies:</h5>
@@ -39,15 +40,15 @@
                         {
                             if (item.MissionAnswers.Count > 0)
                             {
-                                <ul class="list-group list-group-flush" id="replyList_@item.MissionQuestionID">
+                                <ul class="list-group list-group-flush" id="replyList_@item.MissionQuestionId">
                                     @foreach (var answer in item.MissionAnswers)
                                     {
-                                        <li class="list-group-item" onmouseenter="ShowTools(adelete_@answer.MissionAnswerID)" onmouseleave="HideTools(adelete_@answer.MissionAnswerID)">
+                                        <li class="list-group-item" onmouseenter="ShowTools(adelete_@answer.MissionAnswerId)" onmouseleave="HideTools(adelete_@answer.MissionAnswerId)">
                                             <div class="d-flex align-items-center">
-                                                <h5 class="mr-auto">@answer.UserID.Split('@')[0] says:</h5>
-                                                @if (answer.UserID == User.Identity.Name)
+                                                <h5 class="mr-auto">@answer.UserId.Split('@')[0] says:</h5>
+                                                @if (answer.UserId == User.Identity.Name)
                                                 {
-                                                    <a href="@Url.Action("DeleteA", "Missions", routeValues: new { uId = answer.UserID, aId = answer.MissionAnswerID, missionId = Model.MissionId})" class="text-secondary" id="adelete_@answer.MissionAnswerID" style="display: none;">
+                                                    <a href="@Url.Action("DeleteA", "Missions", routeValues: new { uId = answer.UserId, aId = answer.MissionAnswerId, missionId = Model.MissionId})" class="text-secondary" id="adelete_@answer.MissionAnswerId" style="display: none;">
                                                         <i class="fas fa-times"></i>
                                                     </a>
                                                 }
