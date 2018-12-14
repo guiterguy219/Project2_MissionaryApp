@@ -44,14 +44,14 @@ function goLight() {
 
 function goDark() {
     document.body.style.backgroundColor = 'rgb(0,0,0)';
-    document.body.style.color = 'rgb(0, 128, 255)';
+    document.body.style.color = 'white';
     var jumbo = document.getElementsByClassName('jumbotron');
     for (var i = 0; i < jumbo.length; i++) {
-        jumbo[i].style.backgroundColor = 'rgb(0,0,0)';
+        jumbo[i].style.backgroundColor = 'rgb(150,150,150)';
     }
     var card = document.getElementsByClassName('card');
     for (var i = 0; i < card.length; i++) {
-        card[i].style.backgroundColor = 'rgb(0,0,0)';
+        card[i].style.backgroundColor = 'rgb(150,150,150)';
     }
 }
 

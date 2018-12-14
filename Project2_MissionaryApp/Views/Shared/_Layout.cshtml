@@ -3,12 +3,11 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title - Missionary App</title>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    @Styles.Render("~/Content/css")
+
     <link rel="stylesheet" href="~/Content/bootstrap-toggle.min.css" />
-    <link rel="stylesheet" href="~/Content/bootstrap.min.css" id="bootswatchStyle" />
-    <link rel="stylesheet" href="~/Content/Site.css" />
-    @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
     @using Project2_MissionaryApp.DAL
@@ -21,9 +20,9 @@
         </button>
         <div class="collapse navbar-collapse" id="collapsibleNavbar">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item dropdown show">
+                <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="@Url.Action("Index", "Missions")" role="button" aria-haspopup="true" aria-expanded="false">Missions</a>
-                    <div class="dropdown-menu">
+                    <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 44px, 0px);">
                         @foreach (var item in db.Mission.ToList())
                         {
                             @Html.ActionLink(item.MissionName, "Faqs", "Missions", routeValues: new { id = item.MissionId }, htmlAttributes: new { @class = "dropdown-item" })
@@ -46,8 +45,9 @@
         </footer>
     </div>
 
-    @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/popper")
+    @Scripts.Render("~/bundles/bootstrap")
     <script src="~/Scripts/bootstrap-toggle.min.js"></script>
     <script src="~/Scripts/main.js"></script>
     @RenderSection("scripts", required: false)
