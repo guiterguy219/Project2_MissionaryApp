@@ -9,14 +9,15 @@ namespace Project2_MissionaryApp.DAL
 {
     public class MissionContext : DbContext
     {
-        public MissionContext()
-            :base("MissionContext")
+        public MissionContext() : base("MissionContext")
         {
 
         }
 
-        public DbSet<Mission> Mission { get; set; }
+        public DbSet<Mission> Missions { get; set; }
         public DbSet<MissionQuestions> MissionQuestions { get; set; }
         public DbSet<MissionAnswers> MissionAnswers { get; set; }
+
+        //public System.Data.Entity.DbSet<BlowOut.Models.User> Users { get; set; }
     }
 }

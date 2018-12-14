@@ -10,8 +10,6 @@ namespace Project2_MissionaryApp.Models
     [Table("Mission")]
     public class Mission
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int MissionId { get; set; }
         public string MissionName { get; set; }
         public string President { get; set; }
@@ -47,4 +45,30 @@ namespace Project2_MissionaryApp.Models
         //    //AnswerList.Add("Of course.");
         //}
     }
-}
+
+        //show up please
+        [Table("MissionQuestions")]
+        public class MissionQuestions
+        {
+            [Key]
+            [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+            public int MissionQuestionID { get; set; }
+            public int MissionID { get; set; }
+            public virtual Mission Mission { get; set; }
+            public string UserID { get; set; }
+            public string Question { get; set; }
+            public virtual ICollection<MissionAnswers> MissionAnswers { get; set; }
+        }
+
+        [Table("MissionAnswers")]
+        public class MissionAnswers
+        {
+            [Key]
+            [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+            public int MissionAnswerID { get; set; }
+            public int MissionQuestionID { get; set; }
+            public virtual MissionQuestions MissionQuestions { get; set; }
+            public string Answer { get; set; }
+            public string UserID { get; set; }
+        }
+ }
