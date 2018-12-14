@@ -46,6 +46,7 @@ namespace Project2_MissionaryApp
             app.UseTwoFactorRememberBrowserCookie(DefaultAuthenticationTypes.TwoFactorRememberBrowserCookie);
 
             //Uncomment the following lines to enable logging in with third party login providers
+
             //app.UseMicrosoftAccountAuthentication(
             //    clientId: "",
             //    clientSecret: "");

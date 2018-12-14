@@ -3,6 +3,7 @@ using Project2_MissionaryApp.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -56,6 +57,11 @@ namespace MissionaryApp.Controllers
         {
             if(uId == User.Identity.Name)
             {
+                foreach(MissionAnswers answer in db.MissionAnswers.Where(a => a.MissionQuestionID == qId))
+                {
+                    db.MissionAnswers.Remove(answer);
+                }
+                db.SaveChangesAsync();
 
             }
 
