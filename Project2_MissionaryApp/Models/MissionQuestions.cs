@@ -7,6 +7,7 @@ using System.Web;
 
 namespace Project2_MissionaryApp.Models
 {
+    //show up please
     [Table("MissionQuestions")]
     public class MissionQuestions
     {
