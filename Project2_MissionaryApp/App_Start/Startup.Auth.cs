@@ -54,11 +54,11 @@ namespace Project2_MissionaryApp
             //   appId: "",
             //   appSecret: "");
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
+            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            {
+                ClientId = "1022836224347-6420n3f925pdummu16o86t66spbg52uu.apps.googleusercontent.com",
+                ClientSecret = "I3fvlqXw4ESlY8a4_cuPoPcg"
+            });
 
             //app.UseTwitterAuthentication(
             //   consumerKey: "",

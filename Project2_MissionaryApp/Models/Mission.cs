@@ -7,8 +7,10 @@ using System.Web;
 
 namespace Project2_MissionaryApp.Models
 {
+    [Table("Mission")]
     public class Mission
     {
+        [Key]
         public int MissionId { get; set; }
         public string MissionName { get; set; }
         public string President { get; set; }
@@ -17,6 +19,7 @@ namespace Project2_MissionaryApp.Models
         public string Climate { get; set; }
         public string DominantReligion { get; set; }
         public string LogoFilePath { get; set; }
+        //foreign key
         public virtual ICollection<MissionQuestions> MissionQuestions { get; set; }
 
         //public Mission(string missionName, string president, string address, string language, string climate, string dominantReligion, string logoFilePath)
