@@ -47,9 +47,9 @@ namespace MissionaryApp.Controllers
             {
                 //new question object
                 MissionQuestions question = new MissionQuestions();
-                question.MissionId = id;
+                question.MissionID = id;
                 question.Question = form["question"];
-                question.UserId = User.Identity.Name;
+                question.UserID = User.Identity.Name;
 
                 //add question to database
                 db.MissionQuestions.Add(question);
@@ -68,8 +68,8 @@ namespace MissionaryApp.Controllers
             {
                 MissionAnswers answer = new MissionAnswers();
                 answer.Answer = form["answer_" + questionID];
-                answer.MissionQuestionId = questionID;
-                answer.UserId = User.Identity.Name;
+                answer.MissionQuestionID = questionID;
+                answer.UserID = User.Identity.Name;
 
                 //add answer to database
                 db.MissionAnswers.Add(answer);
@@ -84,8 +84,9 @@ namespace MissionaryApp.Controllers
         {
             if(uId == User.Identity.Name)
             {
+
                 //deletes all answers with question
-                foreach(MissionAnswers answer in db.MissionAnswers.Where(a => a.MissionQuestionId == qId))
+                foreach(MissionAnswers answer in db.MissionAnswers.Where(a => a.MissionQuestionID == qId))
                 {
                     db.MissionAnswers.Remove(answer);
                 }

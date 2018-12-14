@@ -8,17 +8,17 @@ using System.Web;
 
 namespace Project2_MissionaryApp.Models
 {
+
     [Table("MissionQuestions")]
     public class MissionQuestions
     {
         [Key]
-        public int MissionQuestionId { get; set; }
-        public int MissionId { get; set; }
-        //foreign key
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int MissionQuestionID { get; set; }
+        public int MissionID { get; set; }
         public virtual Mission Mission { get; set; }
-        public string UserId { get; set; }
+        public string UserID { get; set; }
         public string Question { get; set; }
-        //foreign key but 'backwards'
         public virtual ICollection<MissionAnswers> MissionAnswers { get; set; }
     }
 
@@ -26,11 +26,12 @@ namespace Project2_MissionaryApp.Models
     public class MissionAnswers
     {
         [Key]
-        public int MissionAnswerId { get; set; }
-        public int MissionQuestionId { get; set; }
-        //foreign key
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int MissionAnswerID { get; set; }
+        public int MissionQuestionID { get; set; }
         public virtual MissionQuestions MissionQuestions { get; set; }
-        public string UserId { get; set; }
         public string Answer { get; set; }
-        }
+        public string UserID { get; set; }
+    }
 }
+
